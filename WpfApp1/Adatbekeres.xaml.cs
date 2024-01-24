@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +28,7 @@ namespace WpfApp1
         Felvetelizo felvetelizo;
         public Adatbekeres()
         {
-            InitializeComponent();
+            InitializeComponent();    
         }
         public Adatbekeres (Felvetelizo ujfelvetelizo) :this()
         {  
@@ -76,25 +78,31 @@ namespace WpfApp1
         {
             this.Close();
         }
-
-        private void txtNev_TextChanged(object sender, TextChangedEventArgs e)
+        int seged = 0;
+        private async void txtNev_TextChanged(object sender, TextChangedEventArgs e)
         {
+
             string inputName = txtNev.Text;
 
             if (!IsValidName(inputName))
             {
                 txtNev.BorderBrush = Brushes.Red;
+                labNev.Visibility = Visibility.Visible;
             }
             else
             {
                 txtNev.BorderBrush = Brushes.Transparent;
+                if (seged == 0)
+                {
+                    await Task.Delay(1000);
+                    seged++;
+                }
+                labNev.Visibility = Visibility.Hidden;
             }
         }
 
         static bool IsValidName(string name)
         {
-            // Legalább két szóból áll, minden szó nagy kezdőbetűvel kezdődik
-            // és nincs benne szám.
             string[] words = name.Split(' ');
             if (words.Length < 2)
             {
@@ -114,28 +122,33 @@ namespace WpfApp1
 
         static bool IsFirstLetterUppercase(string word)
         {
-            // Ellenőrizzük, hogy az első karakter egy nagy kezdőbetű-e.
             return !string.IsNullOrEmpty(word) && char.IsUpper(word[0]);
         }
 
         static bool ContainsDigit(string word)
         {
-            // Ellenőrizzük, hogy a szó tartalmaz-e számot.
             return Regex.IsMatch(word, @"\d");
         }
 
-
-        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        int seged2 = 0;
+        private async void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputEmail = txtEmail.Text;
 
             if (!IsValidEmail(inputEmail))
             {
                 txtEmail.BorderBrush = Brushes.Red;
+                labEmail.Visibility = Visibility.Visible;
             }
             else
             {
+                if (seged2 == 0)
+                {
+                    await Task.Delay(1000);
+                    seged2++;
+                }
                 txtEmail.BorderBrush = Brushes.Transparent;
+                labEmail.Visibility = Visibility.Hidden;
             }
         }
         static bool IsValidEmail(string email)
@@ -150,39 +163,53 @@ namespace WpfApp1
                 return false;
             }
         }
-        private void txtCim_TextChanged(object sender, TextChangedEventArgs e)
+        int seged3 = 0;
+        private async void txtCim_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(string.IsNullOrWhiteSpace(txtCim.Text))
             {
                 txtCim.BorderBrush = Brushes.Red;
+                labCim.Visibility = Visibility.Visible;
             }
             else
             {
+                if (seged3 == 0)
+                {
+                    await Task.Delay(1000);
+                    seged3++;
+                }
                 txtCim.BorderBrush = Brushes.Transparent;
+                labCim.Visibility = Visibility.Hidden;
             }
         }
 
-        private void txtAzonosito_TextChanged(object sender, TextChangedEventArgs e)
+        int seged4=0;
+        private async void txtAzonosito_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputNumber = txtAzonosito.Text;
 
             if (!IsValidNumber(inputNumber))
             {
                 txtAzonosito.BorderBrush = Brushes.Red;
+                labAzonosito.Visibility = Visibility.Visible;
             }
             else
             {
+                if (seged4 == 0)
+                {
+                    await Task.Delay(1000);
+                    seged4++;
+                }
                 txtAzonosito.BorderBrush= Brushes.Transparent;
+                labAzonosito.Visibility = Visibility.Hidden;
             }
         }
         static bool IsValidNumber(string number)
         {
-            // Ellenőrizzük, hogy csak számokat tartalmaz és pontosan 11 karakter hosszú.
             return !string.IsNullOrEmpty(number) && number.Length == 11 && IsNumeric(number);
         }
         static bool IsNumeric(string value)
         {
-            // Ellenőrizzük, hogy a string csak számokat tartalmaz.
             foreach (char c in value)
             {
                 if (!char.IsDigit(c))
@@ -193,111 +220,56 @@ namespace WpfApp1
             return true;
         }
 
-        private void txtMagyarpontok_TextChanged(object sender, TextChangedEventArgs e)
+        int seged5= 0;
+        private async void txtMagyarpontok_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputNumber=txtMagyarpontok.Text;
             if (IsValidNumber11(inputNumber))
             {
-                    txtMagyarpontok.BorderBrush = Brushes.Transparent;
+                if (seged5 == 0)
+                {
+                    await Task.Delay(1000);
+                    seged5++;
+                }
+                txtMagyarpontok.BorderBrush = Brushes.Transparent;
+                labMagyar.Visibility = Visibility.Hidden;
             }
             else
             {
+                
                 txtMagyarpontok.BorderBrush= Brushes.Red;
+                labMagyar.Visibility = Visibility.Visible;
             }
         }
 
-        private void txtMatekpontok_TextChanged(object sender, TextChangedEventArgs e)
+        int seged6=0;
+        private async void txtMatekpontok_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputNumber = txtMatekpontok.Text;
             if (IsValidNumber11(inputNumber))
             {
-                    txtMatekpontok.BorderBrush = Brushes.Transparent;
+                if (seged6 == 0)
+                {
+                    await Task.Delay(1000);
+                    seged6++;
+                }
+                txtMatekpontok.BorderBrush = Brushes.Transparent;
+                labMatek.Visibility = Visibility.Hidden;
             }
             else
             {
+               
                 txtMatekpontok.BorderBrush = Brushes.Red;
+                labMatek.Visibility= Visibility.Visible;
             }
         }
         static bool IsValidNumber11(string number)
         {
-            // Ellenőrizzük, hogy csak számokat tartalmaz és az érték 0 és 50 között van.
             if (int.TryParse(number, out int parsedNumber))
             {
                 return parsedNumber >= 0 && parsedNumber <= 50;
             }
             return false;
-        }
-
-        private void txtNev_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (txtNev.BorderBrush==Brushes.Red)
-            {
-                labNev.Foreground = Brushes.Red;
-            }
-            else
-            {
-                labNev.Foreground = Brushes.Transparent;
-            }
-        }
-
-        private void txtEmail_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (txtEmail.BorderBrush == Brushes.Red)
-            {
-                labEmail.Foreground = Brushes.Red;
-            }
-            else
-            {
-                labEmail.Foreground = Brushes.Transparent;
-            }
-        }
-
-        private void txtCim_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (txtCim.BorderBrush == Brushes.Red)
-            {
-                labCim.Foreground = Brushes.Red;
-            }
-            else
-            {
-                labCim.Foreground = Brushes.Transparent;
-            }
-        }
-
-        private void txtAzonosito_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (txtAzonosito.BorderBrush == Brushes.Red)
-            {
-                labAzonosito.Foreground = Brushes.Red;
-            }
-            else
-            {
-                labAzonosito.Foreground = Brushes.Transparent;
-            }
-        }
-
-        private void txtMagyarpontok_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (txtMagyarpontok.BorderBrush == Brushes.Red)
-            {
-                labMagyar.Foreground = Brushes.Red;
-            }
-            else
-            {
-                labMagyar.Foreground = Brushes.Transparent;
-            }
-        }
-
-        private void txtMatekpontok_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (txtMatekpontok.BorderBrush == Brushes.Red)
-            {
-                labMatek.Foreground = Brushes.Red;
-            }
-            else
-            {
-                labMatek.Foreground = Brushes.Transparent;
-            }
-        }
+        }     
     }
 }

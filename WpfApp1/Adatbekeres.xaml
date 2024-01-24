@@ -87,28 +87,28 @@
 
             <StackPanel VerticalAlignment="Center">
                 <Label Foreground="White" Content="Név:" HorizontalAlignment="Center" />
-                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtNev" Text="Példa Jani" TextChanged="txtNev_TextChanged" LostFocus="txtNev_LostFocus"/>
-                <Label Name="labNev" Foreground="Transparent" HorizontalAlignment="Center" Content="Nagybetűvel kezdődjön és 2 szótagból álljon!"/>
+                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtNev" Text="Példa Jani" TextChanged="txtNev_TextChanged"/>
+                <Label Name="labNev" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Center" Content="Nagybetűvel kezdődjön és 2 szótagból álljon!"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" Grid.Row="1">
                 <Label Foreground="White" Content="Email cím:" HorizontalAlignment="Center" />
-                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtEmail" Text="milyengyiregyhaza@example.com" TextChanged="txtEmail_TextChanged" LostFocus="txtEmail_LostFocus"/>
-                <Label Name="labEmail" Foreground="Transparent" HorizontalAlignment="Center" Content="Figyelj a megfelelő formátumra!"/>
+                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtEmail" Text="milyengyiregyhaza@example.com" TextChanged="txtEmail_TextChanged"/>
+                <Label Visibility="Hidden" Name="labEmail" Foreground="Red" HorizontalAlignment="Center" Content="Figyelj a megfelelő formátumra!"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" Grid.Row="2">
                 <Label Foreground="White" Content="Lakcím:" HorizontalAlignment="Center" />
-                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtCim" Text="1234, Debrecen Mekvart utca 9" TextChanged="txtCim_TextChanged" LostFocus="txtCim_LostFocus"/>
-                <Label Name="labCim" Foreground="Transparent" HorizontalAlignment="Center" Content="Nem hagyhatod üresen!"/>
+                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtCim" Text="1234, Debrecen Mekvart utca 9" TextChanged="txtCim_TextChanged"/>
+                <Label Visibility="Hidden" Name="labCim" Foreground="red" HorizontalAlignment="Center" Content="Nem hagyhatod üresen!"/>
             </StackPanel>
 
 
 
             <StackPanel VerticalAlignment="Center" Grid.Column="1">
                 <Label Foreground="White" Content="OM Azonosító:" HorizontalAlignment="Center" />
-                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtAzonosito" Text="12345600000" TextChanged="txtAzonosito_TextChanged" LostFocus="txtAzonosito_LostFocus"/>
-                <Label Name="labAzonosito" Foreground="Transparent" HorizontalAlignment="Center" Content="11 számjegyet adj meg!"/>
+                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtAzonosito" Text="12345600000" TextChanged="txtAzonosito_TextChanged"/>
+                <Label Visibility="Hidden" Name="labAzonosito" Foreground="Red" HorizontalAlignment="Center" Content="11 számjegyet adj meg!"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
@@ -118,15 +118,15 @@
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2">
                 <Label Foreground="White" Content="Magyar Pontok:" />
-                <TextBox BorderThickness="2" Margin="10,0,0,0" HorizontalAlignment="Left" Width="100" Height="25" x:Name="txtMagyarpontok" Text="50" TextChanged="txtMagyarpontok_TextChanged" LostFocus="txtMagyarpontok_LostFocus"/>
-                <Label Name="labMagyar" Foreground="Transparent" HorizontalAlignment="Center" Content="0-50-ig válassz!"/>
+                <TextBox BorderThickness="2" Margin="10,0,0,0" HorizontalAlignment="Left" Width="100" Height="25" x:Name="txtMagyarpontok" Text="50" TextChanged="txtMagyarpontok_TextChanged"/>
+                <Label Visibility="Hidden" Name="labMagyar" Foreground="Red" HorizontalAlignment="Center" Content="0-50-ig válassz!"/>
             </StackPanel>
 
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2">
                 <Label Foreground="White" Content="Matek Pontok:" HorizontalAlignment="Left" />
-                <TextBox BorderThickness="2" Margin="0,0,10,0" HorizontalAlignment="Left" Width="100" Height="25" x:Name="txtMatekpontok" Text="50" TextChanged="txtMatekpontok_TextChanged" LostFocus="txtMatekpontok_LostFocus"/>
-                <Label Name="labMatek" Foreground="Transparent" HorizontalAlignment="Center" Content="0-50-ig válassz!"/>
+                <TextBox BorderThickness="2" Margin="0,0,10,0" HorizontalAlignment="Left" Width="100" Height="25" x:Name="txtMatekpontok" Text="50" TextChanged="txtMatekpontok_TextChanged"/>
+                <Label Visibility="Hidden" Name="labMatek" Foreground="Red" HorizontalAlignment="Center" Content="0-50-ig válassz!"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
