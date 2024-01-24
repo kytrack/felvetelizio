@@ -62,16 +62,36 @@ namespace WpfApp1
         }
 
         private void btnImportal_Click(object sender, RoutedEventArgs e)
-        {          
-            OpenFileDialog valaszt = new OpenFileDialog();
-            if (valaszt.ShowDialog() == true)
+        {
+            if (FelvetelizokLista.Count()>0)
             {
-                FelvetelizokLista.Clear();
-                foreach (String item in File.ReadAllLines(valaszt.FileName).Skip(1))
+                MessageBoxResult result = MessageBox.Show("Biztos vagy benne, hogy új adatokat importálsz? Az eddigi adataid elfognak veszni.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
                 {
-                    FelvetelizokLista.Add(new Felvetelizo(item));
+                    OpenFileDialog valaszt = new OpenFileDialog();
+                    if (valaszt.ShowDialog() == true)
+                    {
+                        FelvetelizokLista.Clear();
+                        foreach (String item in File.ReadAllLines(valaszt.FileName).Skip(1))
+                        {
+                            FelvetelizokLista.Add(new Felvetelizo(item));
+                        }
+                    }
                 }
-            }   
+            }
+            else
+            {
+                OpenFileDialog valaszt = new OpenFileDialog();
+                if (valaszt.ShowDialog() == true)
+                {
+                    foreach (String item in File.ReadAllLines(valaszt.FileName).Skip(1))
+                    {
+                        FelvetelizokLista.Add(new Felvetelizo(item));
+                    }
+                }
+            }
+            
         }
 
         private async void btnExportal_Click(object sender, RoutedEventArgs e)
@@ -95,6 +115,27 @@ namespace WpfApp1
         private void btnKilep_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSzerkeszt_Click(object sender, RoutedEventArgs e)
+        {
+            Felvetelizo ujfelvetelizo = new Felvetelizo();
+            ujfelvetelizo.OM_Azonosito = FelvetelizokLista[dgFelvetelizok.SelectedIndex].OM_Azonosito;
+            ujfelvetelizo.Neve = FelvetelizokLista[dgFelvetelizok.SelectedIndex].Neve;
+            ujfelvetelizo.Email = FelvetelizokLista[dgFelvetelizok.SelectedIndex].Email;
+            ujfelvetelizo.ErtesitesiCime = FelvetelizokLista[dgFelvetelizok.SelectedIndex].ErtesitesiCime;
+            ujfelvetelizo.SzuletesiDatum= FelvetelizokLista[dgFelvetelizok.SelectedIndex].SzuletesiDatum;
+            ujfelvetelizo.Matematika= FelvetelizokLista[dgFelvetelizok.SelectedIndex].Matematika;
+            ujfelvetelizo.Magyar= FelvetelizokLista[dgFelvetelizok.SelectedIndex].Magyar;
+
+
+
+            Adatbekeres secondWindow = new Adatbekeres(ujfelvetelizo);
+            secondWindow.ShowDialog();
+
+
+            FelvetelizokLista.Insert(dgFelvetelizok.SelectedIndex, ujfelvetelizo);
+            FelvetelizokLista.RemoveAt(dgFelvetelizok.SelectedIndex);
         }
     }
 }

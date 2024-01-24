@@ -71,62 +71,63 @@
     </Window.Resources>
     <Border CornerRadius="25" Background="#282828">
 
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="0.5*"/>
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel VerticalAlignment="Center">
-            <Label Foreground="White" Content="Név:" HorizontalAlignment="Center" />
-            <TextBox HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtNev" Text="Példa Jani"/>
-        </StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel VerticalAlignment="Center" Grid.Row="1">
+            <StackPanel VerticalAlignment="Center">
+                <Label Foreground="White" Content="Név:" HorizontalAlignment="Center" />
+                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtNev" Text="Példa Jani" TextChanged="txtNev_TextChanged"/>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" Grid.Row="1">
                 <Label Foreground="White" Content="Email cím:" HorizontalAlignment="Center" />
-            <TextBox HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtEmail" Text="milyengyiregyhaza@example.com"/>
-        </StackPanel>
+                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtEmail" Text="milyengyiregyhaza@example.com" TextChanged="txtEmail_TextChanged"/>
+            </StackPanel>
 
-        <StackPanel VerticalAlignment="Center" Grid.Row="2">
+            <StackPanel VerticalAlignment="Center" Grid.Row="2">
                 <Label Foreground="White" Content="Lakcím:" HorizontalAlignment="Center" />
-            <TextBox HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtCim" Text="1234, Debrecen Mekvart utca 9"/>
-        </StackPanel>
+                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtCim" Text="1234, Debrecen Mekvart utca 9" TextChanged="txtCim_TextChanged"/>
+            </StackPanel>
 
 
 
-        <StackPanel VerticalAlignment="Center" Grid.Column="1">
+            <StackPanel VerticalAlignment="Center" Grid.Column="1">
                 <Label Foreground="White" Content="OM Azonosító:" HorizontalAlignment="Center" />
-            <TextBox HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtAzonosito" Text="123456"/>
-        </StackPanel>
+                <TextBox BorderThickness="2" HorizontalAlignment="Center" Width="200" Height="25" x:Name="txtAzonosito" Text="123456" TextChanged="txtAzonosito_TextChanged"/>
+            </StackPanel>
 
-        <StackPanel VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
-                <Label Foreground="White" Content="OM Azonosító:" HorizontalAlignment="Center" />
-            <DatePicker x:Name="dpSzuletesiido" SelectedDate="2005-01-01"/>
-        </StackPanel>
+            <StackPanel VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+                <Label Foreground="White" Content="Stületési idő:" HorizontalAlignment="Center" />
+                <DatePicker x:Name="dpSzuletesiido" SelectedDate="2005-01-01"/>
+            </StackPanel>
 
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2">
                 <Label Foreground="White" Content="Magyar Pontok:" />
-                <TextBox Margin="10,0,0,0" HorizontalAlignment="Left" Width="100" Height="25" x:Name="txtMagyarpontok" Text="50"/>
-        </StackPanel>
+                <TextBox BorderThickness="2" Margin="10,0,0,0" HorizontalAlignment="Left" Width="100" Height="25" x:Name="txtMagyarpontok" Text="50" TextChanged="txtMagyarpontok_TextChanged"/>
+            </StackPanel>
 
 
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2">
                 <Label Foreground="White" Content="Matek Pontok:" HorizontalAlignment="Left" />
-            <TextBox Margin="0,0,10,0" HorizontalAlignment="Left" Width="100" Height="25" x:Name="txtMatekpontok" Text="50"/>
-        </StackPanel>
+                <TextBox BorderThickness="2" Margin="0,0,10,0" HorizontalAlignment="Left" Width="100" Height="25" x:Name="txtMatekpontok" Text="50" TextChanged="txtMatekpontok_TextChanged"/>
+            </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                <Button Margin="0,0,10,0" Foreground="White" Style="{DynamicResource ButtonStyle1}"  Grid.Row="3" Grid.ColumnSpan="2" Content="Felvétel"  VerticalAlignment="Center" Height="30" Width="100" Click="Button_Click"/>
+                <Button x:Name="btnFelvetel" Margin="0,0,10,0" Foreground="White" Style="{DynamicResource ButtonStyle1}"  Grid.Row="3" Grid.ColumnSpan="2" Content="Felvétel"  VerticalAlignment="Center" Height="30" Width="100" Click="Button_Click"/>
                 <Button Margin="10,0,0,0" Foreground="White" Style="{DynamicResource ButtonStyle1}"  Grid.Row="3" Grid.ColumnSpan="2" Content="Mégse"  VerticalAlignment="Center" Height="30" Width="100" Click="Button_Click1"/>
             </StackPanel>
+            <Label Grid.Row="2" Grid.ColumnSpan="2" Foreground="Transparent" VerticalAlignment="Bottom" HorizontalAlignment="Left" x:Name="labMentes" Margin="273,0,0,43" Grid.RowSpan="2">Sikeres Felvétel!!</Label>
         </Grid>
     </Border>
 </Window>

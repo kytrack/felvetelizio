@@ -147,6 +147,7 @@
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Új adat felvétele" x:Name="btnFelvesz" Margin="0px 5px 0px 30px" Click="btnFelvesz_Click"/>
                 <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Adat törlése" x:Name="btnTorol" Margin="0px 5px 0px 30px" Click="btnTorol_Click"/>
+<Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Width="120" Content="Szerkesztés" x:Name="btnSzerkeszt" Margin="0px 5px 0px 30px" Click="btnSzerkeszt_Click"/>
             <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Importálás" x:Name="btnImportal" Margin="0px 5px 0px 30px" Click="btnImportal_Click"/>
             <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Width="120" Content="Exportálás" x:Name="btnExportal" Margin="0px 5px 0px 0px" Click="btnExportal_Click"/>
                 <Label Foreground="Transparent" HorizontalAlignment="Center" x:Name="labMentes">Sikeres Mentés!</Label>
