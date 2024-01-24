@@ -227,5 +227,77 @@ namespace WpfApp1
             }
             return false;
         }
+
+        private void txtNev_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtNev.BorderBrush==Brushes.Red)
+            {
+                labNev.Foreground = Brushes.Red;
+            }
+            else
+            {
+                labNev.Foreground = Brushes.Transparent;
+            }
+        }
+
+        private void txtEmail_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtEmail.BorderBrush == Brushes.Red)
+            {
+                labEmail.Foreground = Brushes.Red;
+            }
+            else
+            {
+                labEmail.Foreground = Brushes.Transparent;
+            }
+        }
+
+        private void txtCim_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtCim.BorderBrush == Brushes.Red)
+            {
+                labCim.Foreground = Brushes.Red;
+            }
+            else
+            {
+                labCim.Foreground = Brushes.Transparent;
+            }
+        }
+
+        private void txtAzonosito_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtAzonosito.BorderBrush == Brushes.Red)
+            {
+                labAzonosito.Foreground = Brushes.Red;
+            }
+            else
+            {
+                labAzonosito.Foreground = Brushes.Transparent;
+            }
+        }
+
+        private void txtMagyarpontok_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtMagyarpontok.BorderBrush == Brushes.Red)
+            {
+                labMagyar.Foreground = Brushes.Red;
+            }
+            else
+            {
+                labMagyar.Foreground = Brushes.Transparent;
+            }
+        }
+
+        private void txtMatekpontok_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtMatekpontok.BorderBrush == Brushes.Red)
+            {
+                labMatek.Foreground = Brushes.Red;
+            }
+            else
+            {
+                labMatek.Foreground = Brushes.Transparent;
+            }
+        }
     }
 }

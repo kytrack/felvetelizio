@@ -125,14 +125,14 @@
         </Style>
     </Window.Resources>
 
-    <Border CornerRadius="25" Background="#282828">
+    <Border CornerRadius="25" BorderThickness="1" BorderBrush="#150c25" Background="#282828">
         
    
         <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="10*"/>
-            <RowDefinition/>
+            <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -152,7 +152,8 @@
             <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Width="120" Content="Exportálás" x:Name="btnExportal" Margin="0px 5px 0px 0px" Click="btnExportal_Click"/>
                 <Label Foreground="Transparent" HorizontalAlignment="Center" x:Name="labMentes">Sikeres Mentés!</Label>
         </StackPanel>
-
-    </Grid>
+            <Button VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Width="100" Content="Exportálás JSON" x:Name="btnExportaljson" Margin="0px 5px 10px 0px" Click="btnExportaljson_Click"/>
+            <Button VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Width="100" Content="Importálás JSON" x:Name="btnImportaljson" Margin="0px 5px 10px 0px" Click="btnImportaljson_Click"/>
+        </Grid>
     </Border>
 </Window>

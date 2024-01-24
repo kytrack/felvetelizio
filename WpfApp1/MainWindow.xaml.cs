@@ -17,6 +17,9 @@ using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading;
+using System.Text.Json;
+using System.Text.Encodings.Web;
+using System.Net.Http.Json;
 
 namespace WpfApp1
 {
@@ -53,10 +56,13 @@ namespace WpfApp1
 
         private void btnTorol_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Biztos törlöd a kiválasztott elemet?", "Igen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Biztos törlöd a kiválasztott elemet/elemeket?", "Igen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                int kivalasztott = dgFelvetelizok.SelectedIndex;
-                FelvetelizokLista.RemoveAt(kivalasztott);
+                var selectedItems = dgFelvetelizok.SelectedItems.Cast<IFelvetelizo>().ToList();
+                foreach (var item in selectedItems)
+                {
+                    FelvetelizokLista.Remove(item);
+                }
             }
             
         }
@@ -119,23 +125,75 @@ namespace WpfApp1
 
         private void btnSzerkeszt_Click(object sender, RoutedEventArgs e)
         {
-            Felvetelizo ujfelvetelizo = new Felvetelizo();
-            ujfelvetelizo.OM_Azonosito = FelvetelizokLista[dgFelvetelizok.SelectedIndex].OM_Azonosito;
-            ujfelvetelizo.Neve = FelvetelizokLista[dgFelvetelizok.SelectedIndex].Neve;
-            ujfelvetelizo.Email = FelvetelizokLista[dgFelvetelizok.SelectedIndex].Email;
-            ujfelvetelizo.ErtesitesiCime = FelvetelizokLista[dgFelvetelizok.SelectedIndex].ErtesitesiCime;
-            ujfelvetelizo.SzuletesiDatum= FelvetelizokLista[dgFelvetelizok.SelectedIndex].SzuletesiDatum;
-            ujfelvetelizo.Matematika= FelvetelizokLista[dgFelvetelizok.SelectedIndex].Matematika;
-            ujfelvetelizo.Magyar= FelvetelizokLista[dgFelvetelizok.SelectedIndex].Magyar;
+            if (dgFelvetelizok.SelectedIndex!=-1)
+            {
+                Felvetelizo ujfelvetelizo = new Felvetelizo();
+                ujfelvetelizo.OM_Azonosito = FelvetelizokLista[dgFelvetelizok.SelectedIndex].OM_Azonosito;
+                ujfelvetelizo.Neve = FelvetelizokLista[dgFelvetelizok.SelectedIndex].Neve;
+                ujfelvetelizo.Email = FelvetelizokLista[dgFelvetelizok.SelectedIndex].Email;
+                ujfelvetelizo.ErtesitesiCime = FelvetelizokLista[dgFelvetelizok.SelectedIndex].ErtesitesiCime;
+                ujfelvetelizo.SzuletesiDatum = FelvetelizokLista[dgFelvetelizok.SelectedIndex].SzuletesiDatum;
+                ujfelvetelizo.Matematika = FelvetelizokLista[dgFelvetelizok.SelectedIndex].Matematika;
+                ujfelvetelizo.Magyar = FelvetelizokLista[dgFelvetelizok.SelectedIndex].Magyar;
 
+                Adatbekeres secondWindow = new Adatbekeres(ujfelvetelizo);
+                secondWindow.ShowDialog();
 
+                FelvetelizokLista.Insert(dgFelvetelizok.SelectedIndex, ujfelvetelizo);
+                FelvetelizokLista.RemoveAt(dgFelvetelizok.SelectedIndex);
+            }
+            
+        }
 
-            Adatbekeres secondWindow = new Adatbekeres(ujfelvetelizo);
-            secondWindow.ShowDialog();
+        private void btnExportaljson_Click(object sender, RoutedEventArgs e)
+        {
+            var opciok = new JsonSerializerOptions();
+            opciok.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            opciok.WriteIndented = true;
+            string adatokSorai = JsonSerializer.Serialize(FelvetelizokLista, opciok);
+            var lista = new List<string>();
+            lista.Add(adatokSorai);
+            File.WriteAllLines("json_export.txt", lista);
+        }
 
+        List<Felvetelizo>diakok= new List<Felvetelizo>();
+        private void btnImportaljson_Click(object sender, RoutedEventArgs e)
+        {
+            if (FelvetelizokLista.Count() > 0)
+            {
+                MessageBoxResult result = MessageBox.Show("Biztos vagy benne, hogy új adatokat importálsz? Az eddigi adataid elfognak veszni.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            FelvetelizokLista.Insert(dgFelvetelizok.SelectedIndex, ujfelvetelizo);
-            FelvetelizokLista.RemoveAt(dgFelvetelizok.SelectedIndex);
+                if (result == MessageBoxResult.Yes)
+                {
+                    OpenFileDialog valaszt = new OpenFileDialog();
+                    if (valaszt.ShowDialog() == true)
+                    {
+                        FelvetelizokLista.Clear();
+                        string json = File.ReadAllText(valaszt.FileName);
+                        List<Felvetelizo> diakok = JsonSerializer.Deserialize<List<Felvetelizo>>(json);
+                        foreach (var item in diakok)
+                        {
+                            FelvetelizokLista.Add(item);
+                        }
+                        diakok.Clear();
+                    }
+                }
+            }
+            else
+            {
+                OpenFileDialog valaszt = new OpenFileDialog();
+                if (valaszt.ShowDialog() == true)
+                {
+                        string json = File.ReadAllText(valaszt.FileName);
+                    //MessageBox.Show(json);
+                    List<Felvetelizo> diakok = JsonSerializer.Deserialize<List<Felvetelizo>>(json);
+                    foreach (var item in diakok)
+                    {
+                        FelvetelizokLista.Add(item);
+                    }
+                    diakok.Clear();
+                }
+            }
         }
     }
 }
