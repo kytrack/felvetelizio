@@ -41,6 +41,7 @@ namespace WpfApp1
                 dpSzuletesiido.SelectedDate = ujfelvetelizo.SzuletesiDatum;
                 txtMagyarpontok.Text = ujfelvetelizo.Magyar.ToString();
                 txtMatekpontok.Text=ujfelvetelizo.Matematika.ToString();
+                txtAzonosito.IsEnabled = false;
             }
             this.felvetelizo = ujfelvetelizo;
         }
