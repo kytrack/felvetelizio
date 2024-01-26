@@ -66,7 +66,7 @@ namespace WpfApp1
             }
             
         }
-
+        List<Felvetelizo> diakok = new List<Felvetelizo>();
         private void btnImportal_Click(object sender, RoutedEventArgs e)
         {
             if (FelvetelizokLista.Count()>0)
@@ -76,24 +76,58 @@ namespace WpfApp1
                 if (result == MessageBoxResult.Yes)
                 {
                     OpenFileDialog valaszt = new OpenFileDialog();
+                    valaszt.Filter = "JSON files (*.json)|*.json|CSV files (*.csv)|*.csv";
                     if (valaszt.ShowDialog() == true)
                     {
                         FelvetelizokLista.Clear();
-                        foreach (String item in File.ReadAllLines(valaszt.FileName).Skip(1))
+                        string kivalasztottFajl = valaszt.FileName;
+
+                        if (kivalasztottFajl.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
                         {
-                            FelvetelizokLista.Add(new Felvetelizo(item));
+                            string json = File.ReadAllText(valaszt.FileName);
+                            List<Felvetelizo> diakok = JsonSerializer.Deserialize<List<Felvetelizo>>(json);
+                            foreach (var item in diakok)
+                            {
+                                FelvetelizokLista.Add(item);
+                            }
+                            diakok.Clear();
                         }
+                        else
+                        {
+                            foreach (String item in File.ReadAllLines(valaszt.FileName).Skip(1))
+                            {
+                                FelvetelizokLista.Add(new Felvetelizo(item));
+                            }
+                        }
+
+
                     }
                 }
             }
             else
             {
                 OpenFileDialog valaszt = new OpenFileDialog();
+                valaszt.Filter = "JSON files (*.json)|*.json|CSV files (*.csv)|*.csv";
                 if (valaszt.ShowDialog() == true)
                 {
-                    foreach (String item in File.ReadAllLines(valaszt.FileName).Skip(1))
+                    string kivalasztottFajl = valaszt.FileName;
+
+                    if (kivalasztottFajl.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
                     {
-                        FelvetelizokLista.Add(new Felvetelizo(item));
+                        string json = File.ReadAllText(valaszt.FileName);
+                        List<Felvetelizo> diakok = JsonSerializer.Deserialize<List<Felvetelizo>>(json);
+                        foreach (var item in diakok)
+                        {
+                            FelvetelizokLista.Add(item);
+                        }
+                        diakok.Clear();
+                    }
+                    else
+                    {
+                        foreach (String item in File.ReadAllLines(valaszt.FileName).Skip(1))
+                        {
+                            FelvetelizokLista.Add(new Felvetelizo(item));
+                        }
                     }
                 }
             }
@@ -153,47 +187,7 @@ namespace WpfApp1
             string adatokSorai = JsonSerializer.Serialize(FelvetelizokLista, opciok);
             var lista = new List<string>();
             lista.Add(adatokSorai);
-            File.WriteAllLines("json_export.txt", lista);
-        }
-
-        List<Felvetelizo>diakok= new List<Felvetelizo>();
-        private void btnImportaljson_Click(object sender, RoutedEventArgs e)
-        {
-            if (FelvetelizokLista.Count() > 0)
-            {
-                MessageBoxResult result = MessageBox.Show("Biztos vagy benne, hogy új adatokat importálsz? Az eddigi adataid elfognak veszni.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    OpenFileDialog valaszt = new OpenFileDialog();
-                    if (valaszt.ShowDialog() == true)
-                    {
-                        FelvetelizokLista.Clear();
-                        string json = File.ReadAllText(valaszt.FileName);
-                        List<Felvetelizo> diakok = JsonSerializer.Deserialize<List<Felvetelizo>>(json);
-                        foreach (var item in diakok)
-                        {
-                            FelvetelizokLista.Add(item);
-                        }
-                        diakok.Clear();
-                    }
-                }
-            }
-            else
-            {
-                OpenFileDialog valaszt = new OpenFileDialog();
-                if (valaszt.ShowDialog() == true)
-                {
-                        string json = File.ReadAllText(valaszt.FileName);
-                    //MessageBox.Show(json);
-                    List<Felvetelizo> diakok = JsonSerializer.Deserialize<List<Felvetelizo>>(json);
-                    foreach (var item in diakok)
-                    {
-                        FelvetelizokLista.Add(item);
-                    }
-                    diakok.Clear();
-                }
-            }
-        }
+            File.WriteAllLines("json_export.json", lista);
+        } 
     }
 }

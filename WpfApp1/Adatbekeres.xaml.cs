@@ -79,27 +79,24 @@ namespace WpfApp1
         {
             this.Close();
         }
-        int seged = 0;
-        private async void txtNev_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtNev_TextChanged(object sender, TextChangedEventArgs e)
         {
 
             string inputName = txtNev.Text;
-
-            if (!IsValidName(inputName))
+            if (labNev!=null)
             {
-                txtNev.BorderBrush = Brushes.Red;
-                labNev.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                txtNev.BorderBrush = Brushes.Transparent;
-                if (seged == 0)
+                if (!IsValidName(inputName))
                 {
-                    await Task.Delay(1000);
-                    seged++;
+                    txtNev.BorderBrush = Brushes.Red;
+                    labNev.Visibility = Visibility.Visible;
                 }
-                labNev.Visibility = Visibility.Hidden;
+                else
+                {
+                    txtNev.BorderBrush = Brushes.Transparent;
+                    labNev.Visibility = Visibility.Hidden;
+                }
             }
+            
         }
 
         static bool IsValidName(string name)
@@ -131,26 +128,23 @@ namespace WpfApp1
             return Regex.IsMatch(word, @"\d");
         }
 
-        int seged2 = 0;
-        private async void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputEmail = txtEmail.Text;
-
-            if (!IsValidEmail(inputEmail))
+            if (labEmail!=null)
             {
-                txtEmail.BorderBrush = Brushes.Red;
-                labEmail.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                if (seged2 == 0)
+                if (!IsValidEmail(inputEmail))
                 {
-                    await Task.Delay(1000);
-                    seged2++;
+                    txtEmail.BorderBrush = Brushes.Red;
+                    labEmail.Visibility = Visibility.Visible;
                 }
-                txtEmail.BorderBrush = Brushes.Transparent;
-                labEmail.Visibility = Visibility.Hidden;
+                else
+                {
+                    txtEmail.BorderBrush = Brushes.Transparent;
+                    labEmail.Visibility = Visibility.Hidden;
+                }
             }
+           
         }
         static bool IsValidEmail(string email)
         {
@@ -164,46 +158,41 @@ namespace WpfApp1
                 return false;
             }
         }
-        int seged3 = 0;
-        private async void txtCim_TextChanged(object sender, TextChangedEventArgs e)
+        private  void txtCim_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(txtCim.Text))
+            if (labCim!=null)
             {
-                txtCim.BorderBrush = Brushes.Red;
-                labCim.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                if (seged3 == 0)
+                if (string.IsNullOrWhiteSpace(txtCim.Text))
                 {
-                    await Task.Delay(1000);
-                    seged3++;
+                    txtCim.BorderBrush = Brushes.Red;
+                    labCim.Visibility = Visibility.Visible;
                 }
-                txtCim.BorderBrush = Brushes.Transparent;
-                labCim.Visibility = Visibility.Hidden;
+                else
+                {
+                    txtCim.BorderBrush = Brushes.Transparent;
+                    labCim.Visibility = Visibility.Hidden;
+                }
             }
-        }
 
-        int seged4=0;
-        private async void txtAzonosito_TextChanged(object sender, TextChangedEventArgs e)
+        }
+        private void txtAzonosito_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputNumber = txtAzonosito.Text;
 
-            if (!IsValidNumber(inputNumber))
+            if (labAzonosito != null)
             {
-                txtAzonosito.BorderBrush = Brushes.Red;
-                labAzonosito.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                if (seged4 == 0)
+                if (!IsValidNumber(inputNumber))
                 {
-                    await Task.Delay(1000);
-                    seged4++;
+                    txtAzonosito.BorderBrush = Brushes.Red;
+                    labAzonosito.Visibility = Visibility.Visible;
                 }
-                txtAzonosito.BorderBrush= Brushes.Transparent;
-                labAzonosito.Visibility = Visibility.Hidden;
+                else
+                {
+                    txtAzonosito.BorderBrush = Brushes.Transparent;
+                    labAzonosito.Visibility = Visibility.Hidden;
+                }
             }
+           
         }
         static bool IsValidNumber(string number)
         {
@@ -221,48 +210,43 @@ namespace WpfApp1
             return true;
         }
 
-        int seged5= 0;
-        private async void txtMagyarpontok_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtMagyarpontok_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputNumber=txtMagyarpontok.Text;
-            if (IsValidNumber11(inputNumber))
+            if (labMagyar!=null)
             {
-                if (seged5 == 0)
+                if (IsValidNumber11(inputNumber))
                 {
-                    await Task.Delay(1000);
-                    seged5++;
+                    txtMagyarpontok.BorderBrush = Brushes.Transparent;
+                    labMagyar.Visibility = Visibility.Hidden;
                 }
-                txtMagyarpontok.BorderBrush = Brushes.Transparent;
-                labMagyar.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                
-                txtMagyarpontok.BorderBrush= Brushes.Red;
-                labMagyar.Visibility = Visibility.Visible;
+                else
+                {
+
+                    txtMagyarpontok.BorderBrush = Brushes.Red;
+                    labMagyar.Visibility = Visibility.Visible;
+                }
             }
         }
 
-        int seged6=0;
-        private async void txtMatekpontok_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtMatekpontok_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputNumber = txtMatekpontok.Text;
-            if (IsValidNumber11(inputNumber))
+            if (labMatek!=null)
             {
-                if (seged6 == 0)
+                if (IsValidNumber11(inputNumber))
                 {
-                    await Task.Delay(1000);
-                    seged6++;
+                    txtMatekpontok.BorderBrush = Brushes.Transparent;
+                    labMatek.Visibility = Visibility.Hidden;
                 }
-                txtMatekpontok.BorderBrush = Brushes.Transparent;
-                labMatek.Visibility = Visibility.Hidden;
+                else
+                {
+
+                    txtMatekpontok.BorderBrush = Brushes.Red;
+                    labMatek.Visibility = Visibility.Visible;
+                }
             }
-            else
-            {
-               
-                txtMatekpontok.BorderBrush = Brushes.Red;
-                labMatek.Visibility= Visibility.Visible;
-            }
+
         }
         static bool IsValidNumber11(string number)
         {

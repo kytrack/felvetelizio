@@ -114,6 +114,7 @@
             <StackPanel VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
                 <Label Foreground="White" Content="Születési idő:" HorizontalAlignment="Center" />
                 <DatePicker Width="200" x:Name="dpSzuletesiido" SelectedDate="2005-01-01"/>
+                <Label Visibility="Hidden" Name="labSzuletesiido" Foreground="Red" HorizontalAlignment="Center" Content="11 számjegyet adj meg!"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2">
