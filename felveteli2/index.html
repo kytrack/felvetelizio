@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OM Azonosító Kereső</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>OM Azonosító <span>Kereső</span></h2>
+
+        <form onsubmit="searchOM(); return false;">
+            <label for="omInput">OM azonosító:</label>
+            <input type="text" id="omInput" pattern="\d{11}" required>
+            <button type="submit">Keresés</button>
+        </form>
+
+        <div id="error" class="error-message"></div>
+
+        <div id="result">
+            <table>
+                <thead>
+                    <tr>
+                        <th>OM</th>
+                        <th>Név</th>
+                        <th>Értesítési cím</th>
+                        <th>Email</th>
+                        <th>Születési dátum</th>
+                        <th>Matek</th>
+                        <th>Magyar</th>
+                        <th>Összesen</th>
+                    </tr>
+                </thead>
+                <tbody id="resultBody"></tbody>
+            </table>
+        </div>
+        <div id="result2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>OM</th>
+                        <th>Név</th>
+                    </tr>
+                </thead>
+                <tbody id="resultBody2"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
