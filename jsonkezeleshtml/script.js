@@ -184,7 +184,11 @@ let jsontomb = [
   function Listaz() {
     let osszpontszam = parseInt(document.getElementById("minimumPontszam").value);
     let tartalom = "";
-    
+    let matekossz=0;
+    let magyarossz=0;
+    let osszoszz=0;
+    let talaltelemekszama=0;
+
     for (let i = 0; i < jsontomb.length; i++) {
         let matekPont = jsontomb[i].Matematika;
         let magyarPont = jsontomb[i].Magyar;
@@ -198,7 +202,23 @@ let jsontomb = [
             tartalom += "<td>" + magyarPont + "</td>";
             tartalom += "<td>" + osszesPont + "</td>";
             tartalom += "</tr>";
+
+            matekossz+=matekPont;
+            magyarossz+=magyarPont;
+            osszoszz+=osszesPont;
+            talaltelemekszama++;
         }
+    }
+    
+    if(talaltelemekszama>0){
+        document.getElementById("matekatlag").innerHTML= `Matek átlaga: ${(matekossz/talaltelemekszama).toFixed(1)}`
+        document.getElementById("magyaratlag").innerHTML= `Magyar átlaga: ${(magyarossz/talaltelemekszama).toFixed(1)}`
+        document.getElementById("osszesatlag").innerHTML= `Összes átlaga: ${(osszoszz/talaltelemekszama).toFixed(1)}`
+    }
+    else{
+        document.getElementById("matekatlag").innerHTML= `Matek átlaga:`
+        document.getElementById("magyaratlag").innerHTML= `Magyar átlaga:`
+        document.getElementById("osszesatlag").innerHTML= `Összes átlaga:`
     }
 
     document.getElementById("pontszamTartalom").innerHTML = tartalom;
