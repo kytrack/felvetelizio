@@ -205,6 +205,10 @@ function searchOM() {
     resultBody2.innerHTML = '';
     if (searchData.length > 0) {
         searchData.forEach(function (item) {
+
+            /*
+            eredeti sajat kod:
+
             var row = resultBody.insertRow();
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
@@ -225,6 +229,24 @@ function searchOM() {
             cell7.innerHTML = item.Magyar;
             cell8.innerHTML = item.Matematika + item.Magyar;
             osszpont = item.Matematika + item.Magyar;
+            */
+
+            var row = resultBody.insertRow();
+
+            for (var i = 0; i < 8; i++) {
+                var cell = row.insertCell(i);
+
+                if (i < 7) {
+                    //ezt még nem teljesen értem mit csinál, ideiglenes chatgpt megoldás
+                    var key = Object.keys(item)[i];
+                    cell.innerHTML = item[key];
+                } else {
+                    cell.innerHTML = item.Matematika + item.Magyar;
+                }
+            }
+
+            osszpont = item.Matematika + item.Magyar;
+
         });
 
         errorDiv.innerHTML = '';
@@ -247,5 +269,50 @@ function searchOM() {
             var cell2 = row.insertCell(1);
             cell1.innerHTML = item.OM_Azonosito;
             cell2.innerHTML = item.Neve;
-        })}
+        })
+    }
+}
+function valtoz() {
+    var omInput = document.getElementById('omInput').value;
+    var errorDiv = document.getElementById('error');
+    var resultTable = document.getElementById('result');
+    var resultTable2 = document.getElementById('result2');
+    var resultBody = document.getElementById('resultBody');
+    var resultBody2 = document.getElementById('resultBody2');
+
+
+    var searchData = testdata.filter(function (item) {
+        return item.OM_Azonosito.startsWith(omInput);
+    });
+
+    var osszpont = 0;
+    resultBody.innerHTML = '';
+    resultBody2.innerHTML = '';
+    if (searchData.length > 0) {
+        searchData.forEach(function (item) {
+            var row = resultBody.insertRow();
+
+            for (var i = 0; i < 8; i++) {
+                var cell = row.insertCell(i);
+
+                if (i < 7) {
+                    var key = Object.keys(item)[i];
+                    cell.innerHTML = item[key];
+                } else {
+                    cell.innerHTML = item.Matematika + item.Magyar;
+                }
+            }
+
+            osszpont = item.Matematika + item.Magyar;
+
+        });
+
+        errorDiv.innerHTML = '';
+        resultTable.style.display = 'block';
+        resultTable2.style.display = 'block';
+    } else {
+        errorDiv.innerHTML = 'Nincs találat az adott OM azonosítóval.';
+        resultTable.style.display = 'none';
+        resultTable2.style.display = 'none';
+    }
 }
