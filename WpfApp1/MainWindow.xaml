@@ -126,33 +126,36 @@
     </Window.Resources>
 
     <Border CornerRadius="25" BorderThickness="1" BorderBrush="#150c25" Background="#282828">
-        
-   
+
+
         <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="1.5*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,25,0">
                 <Button Foreground="White" Style="{DynamicResource kezelogombak}" FontSize="25" x:Name="btnTalca" Content="-" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Click="btnTalca_Click"/>
                 <Button Foreground="White" Style="{DynamicResource kezelogombak}" FontSize="25" x:Name="btnKilep" Content="x" VerticalAlignment="Center" HorizontalAlignment="Right" Click="btnKilep_Click"/>
             </StackPanel>
-                <DataGrid Style="{DynamicResource DataGridStyle1}" Background="#282828" Grid.RowSpan="3" x:Name="dgFelvetelizok" Margin="25"/>
-        <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Új adat felvétele" x:Name="btnFelvesz" Margin="0px 5px 0px 30px" Click="btnFelvesz_Click"/>
-                <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Adat törlése" x:Name="btnTorol" Margin="0px 5px 0px 30px" Click="btnTorol_Click"/>
-<Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Width="120" Content="Szerkesztés" x:Name="btnSzerkeszt" Margin="0px 5px 0px 30px" Click="btnSzerkeszt_Click"/>
-            <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Importálás" x:Name="btnImportal" Margin="0px 5px 0px 30px" Click="btnImportal_Click"/>
-            <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Width="120" Content="Exportálás" x:Name="btnExportal" Margin="0px 5px 0px 0px" Click="btnExportal_Click"/>
+            <DataGrid Style="{DynamicResource DataGridStyle1}" Background="#282828" Grid.RowSpan="3" x:Name="dgFelvetelizok" Margin="25"/>
+            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Új adat felvétele" x:Name="btnFelvesz" Margin="0px 5px 0px 10px" Click="btnFelvesz_Click"/>
+                <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Adat törlése" x:Name="btnTorol" Margin="0px 5px 0px 10px" Click="btnTorol_Click"/>
+                <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px"  Content="Szerkesztés" x:Name="btnSzerkeszt" Margin="0px 5px 0px 10px" Click="btnSzerkeszt_Click"/>
+                <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Exportálás adatbázisba" x:Name="btnExportalAdatbazis" Margin="0px 5px 0px 10px" Click="btnExportalAdatbazis_Click"/>
+                <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Importálás adatbázisból" x:Name="btnImportalasAdatbazis" Margin="0px 5px 0px 10px" Click="btnImportalasAdatbazis_Click"/>
+                <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Importálás" x:Name="btnImportal" Margin="0px 5px 0px 10px" Click="btnImportal_Click"/>
+                <Button Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Content="Exportálás" x:Name="btnExportal" Margin="0px 5px 0px 0px" Click="btnExportal_Click"/>
                 <Label Foreground="Transparent" HorizontalAlignment="Center" x:Name="labMentes">Sikeres Mentés!</Label>
-        </StackPanel>
+
+            </StackPanel>
             <Button VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Style="{DynamicResource nelegyenmanhattere}" Foreground="White" Height="35px" Width="120" Content="Exportálás JSON" x:Name="btnExportaljson" Click="btnExportaljson_Click"/>
-         </Grid>
+        </Grid>
     </Border>
 </Window>

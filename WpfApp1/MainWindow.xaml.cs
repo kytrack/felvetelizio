@@ -20,6 +20,8 @@ using System.Threading;
 using System.Text.Json;
 using System.Text.Encodings.Web;
 using System.Net.Http.Json;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace WpfApp1
 {
@@ -188,6 +190,100 @@ namespace WpfApp1
             var lista = new List<string>();
             lista.Add(adatokSorai);
             File.WriteAllLines("json_export.json", lista);
-        } 
+        }
+
+        private void btnExportalAdatbazis_Click(object sender, RoutedEventArgs e)
+        {
+            InputBox inputBox = new InputBox();
+            inputBox.ShowDialog();
+
+            string adatbazis = inputBox.Adatbazis;
+            string tabla = inputBox.Tabla;
+            string connectionString = $"Server=localhost;Database={adatbazis};User ID=root;Password=;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string deleteQuery = $"DELETE FROM {tabla}";
+                    using (MySqlCommand deleteCmd = new MySqlCommand(deleteQuery, connection))
+                    {
+                        deleteCmd.ExecuteNonQuery();
+                    }
+
+                    foreach (IFelvetelizo felvetelizo in FelvetelizokLista)
+                    {
+                        string insertQuery = $"INSERT INTO {tabla} (OM_Azonosito, Neve, ErtesitesiCime, Email, SzuletesiDatum, Matematika, Magyar) " +
+                                             $"VALUES ('{felvetelizo.OM_Azonosito}', '{felvetelizo.Neve}', '{felvetelizo.ErtesitesiCime}', '{felvetelizo.Email}', " +
+                                             $"'{felvetelizo.SzuletesiDatum.ToString("yyyy-MM-dd")}', {felvetelizo.Matematika}, {felvetelizo.Magyar})";
+
+                        using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
+                        {
+                            insertCmd.ExecuteNonQuery();
+                        }
+                    }
+                    MessageBox.Show("Sikeres mentés");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hiba a kapcsolódás vagy adatok mentése során: " + ex.Message);
+                }
+            }
+        }
+
+        private void btnImportalasAdatbazis_Click(object sender, RoutedEventArgs e)
+        {
+            InputBox inputBox = new InputBox();
+            inputBox.ShowDialog();
+
+            string adatbazis = inputBox.Adatbazis;
+            string tabla = inputBox.Tabla;
+            string connectionString = $"Server=localhost;Database={adatbazis};User ID=root;Password=;";
+            MessageBoxResult result = MessageBox.Show("Biztos vagy benne, hogy új adatokat importálsz? Az eddigi adataid elfognak veszni.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    FelvetelizokLista.Clear();
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        Console.WriteLine("Sikeres kapcsolódás a MySQL adatbázishoz!");
+
+                        string selectQuery = $"SELECT * FROM {tabla}";
+                        using (MySqlCommand selectCmd = new MySqlCommand(selectQuery, connection))
+                        {
+                            using (MySqlDataReader reader = selectCmd.ExecuteReader())
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable.Load(reader);
+
+                                foreach (DataRow row in dataTable.Rows)
+                                {
+                                    IFelvetelizo felvetelizo = new Felvetelizo();
+                                    felvetelizo.OM_Azonosito = row["OM_Azonosito"].ToString();
+                                    felvetelizo.Neve = row["Neve"].ToString();
+                                    felvetelizo.ErtesitesiCime = row["ErtesitesiCime"].ToString();
+                                    felvetelizo.Email = row["Email"].ToString();
+                                    felvetelizo.SzuletesiDatum = Convert.ToDateTime(row["SzuletesiDatum"]);
+                                    felvetelizo.Matematika = Convert.ToInt32(row["Matematika"]);
+                                    felvetelizo.Magyar = Convert.ToInt32(row["Magyar"]);
+
+                                    FelvetelizokLista.Add(felvetelizo);
+                                }
+                            }
+                        }
+
+                        Console.WriteLine("Adatok sikeresen betöltve az ObservableCollecion-be!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Hiba a kapcsolódás vagy adatok betöltése során: " + ex.Message);
+                }
+            }
+
+        }
     }
 }
