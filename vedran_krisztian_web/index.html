@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="temavaltogato">
+        <div class="switch-label">
+            <label for="switch"></label>
+            <div class="switch-container" onclick="ValtTema()">
+                <div class="switch"></div>
+            </div>
+        </div>
+    </div>
+    <form>
+        <label for="minimumPontszam">Pontszám minimum:</label>
+        <input type="text" id="minimumPontszam" name="minimumPontszam" placeholder="Minimum pontszám" required>
+        <button type="button" onclick="Listaz()">Listáz</button>
+    </form>
+
+<div style=" overflow-x: auto">
+    <table>
+    <thead>
+        <tr>
+            <th id="matekatlag">Matek átlaga:</th>
+            <th id="magyaratlag">Magyar átlaga:</th>
+            <th id="osszesatlag">Összes átlaga:</th>
+        </tr>
+    </thead>
+    </table>
+</div>
+   
+<div style="overflow-x: auto">
+    <table id="pontszamTabla">
+        <thead>
+            <tr>
+                <th>OM</th>
+                <th>Név<button id="rendezesnev" class="rendezes">↓</button></th>
+                <th>Matek<button id="rendezesmatek" class="rendezes">↓</button></th>
+                <th>Magyar<button id="rendezesmagyar" class="rendezes">↓</button></th>
+                <th>Összesen<button id="rendezesosszesen" class="rendezes">↓</button></th>
+            </tr>
+        </thead>
+        <tbody id="pontszamTartalom">
+           
+        </tbody>
+    </table>
+</div>     
+</body>
+</html>
