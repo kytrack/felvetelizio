@@ -153,6 +153,15 @@ var testdata = [
         "Magyar": 31
     },
     {
+        "OM_Azonosito": "69420237894",
+        "Neve": "Köröskényi István",
+        "ErtesitesiCime": "Miskolc, Rumungro út 13.",
+        "Email": "milyennyiregyhaza@ananasz.com",
+        "SzuletesiDatum": "1985-03-25T00:00:00",
+        "Matematika": 3,
+        "Magyar": 1
+    },
+    {
         "OM_Azonosito": "30381425616",
         "Neve": "Pál Júlia",
         "ErtesitesiCime": "Sopron, Szent Gellért tér 10.",
